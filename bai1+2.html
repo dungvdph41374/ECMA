@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <style type="text/css" media="screen">
+        .user_item {
+            color: green;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form id="userForm">
+        <label for="userId">ID :</label>
+        <input type="text" id="userId" name="userId" required>
+
+        <label for="userName">Name:</label>
+        <input type="text" id="userName" name="userName" required>
+
+        <label for="userGender">Gender:</label>
+        <select name="userGender" id="userGender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <button type="button" onclick="addUser()">Add</button>
+    </form>
+
+    <ul id="target"></ul>
+
+    <script>
+        // Mảng chứa danh sách người dùng
+        var users = [
+            { id: 1, name: "James Smith", gender: "male" },
+            { id: 2, name: "Isla Brown", gender: "female" },
+            { id: 3, name: "Amelia Davies", gender: "female" },
+            { id: 4, name: "Jacob Evans", gender: "male" },
+        ];
+
+        // Lấy thẻ ul để chèn thẻ li
+        var target = document.querySelector('#target');
+
+        // Hàm thêm người dùng
+        function addUser() {
+            var userId = document.getElementById('userId').value;
+            var userName = document.getElementById('userName').value;
+            var userGender = document.getElementById('userGender').value;
+
+            if (userId && userName && userGender) {
+                // Tạo đối tượng user mới
+                var newUser = { id: parseInt(userId), name: userName, gender: userGender };
+
+                // Thêm vào mảng users
+                users.push(newUser);
+
+                // Hiển thị danh sách người dùng
+                displayUserList();
+            } else {
+                alert('Vui lòng nhập đầy đủ thông tin.');
+            }
+        }
+
+        // Hàm hiển thị danh sách người dùng
+        function displayUserList() {
+            target.innerHTML = ''; // Xóa danh sách người dùng hiện tại
+
+            // Duyệt qua mảng users và tạo thẻ li cho mỗi người dùng
+            for (var i = 0; i < users.length; i++) {
+                var user = users[i];
+
+                // Tạo thẻ li và thêm nội dung
+                var listItem = document.createElement('li');
+                listItem.textContent = user.id + '-'+ user.name + ' - ' + user.gender;
+
+                // Thêm class "user_item" cho thẻ li
+                listItem.classList.add('user_item');
+
+                // Thêm thẻ li vào thẻ ul
+                target.appendChild(listItem);
+            }
+        }
+    </script>
+</body>
+</html>

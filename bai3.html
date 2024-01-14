@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CamelCase Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #inputText, #outputText {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        #convertButton {
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>CamelCase Converter</h1>
+
+    <label for="inputText">Input:</label>
+    <input type="text" id="inputText" placeholder="Nhập chuỗi...">
+    
+    <label for="outputText">Output:</label>
+    <input type="text" id="outputText" readonly>
+
+    <button id="convertButton" onclick="convertToCamelCase()">Convert</button>
+
+    <script>
+        function convertToCamelCase() {
+            var inputText = document.getElementById('inputText').value;
+
+            // Loại bỏ khoảng trắng và ký tự đặc biệt
+            var formattedString = inputText.replace(/[^\w\s]/gi, '');
+
+            // Chuyển đổi sang camelCase
+            var camelCaseString = formattedString.replace(/\s(.)/g, function(match, group1) {
+                return group1.toUpperCase();
+            });
+
+            // Hiển thị kết quả
+            document.getElementById('outputText').value = camelCaseString;
+        }
+    </script>
+</body>
+</html>
